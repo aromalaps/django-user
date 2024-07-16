@@ -1,0 +1,40 @@
+{% load static %}
+{% include "base.html" %}
+{% block content %}
+
+<h1>Contact Us</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form class="border mt-5 w-75 mx-auto mb-2" method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="id_name">Your Name:</label>
+                <input type="text" id="id_name" name="name" required>
+                <br>
+                <label for="id_email">Your image</label>
+                <input class="form-control mb-2" type="file" name="image" placeholder="add image">
+                <br>
+                <label for="id_message">Your Message:</label>
+                <textarea id="id_message" name="message" rows="4" required></textarea>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="col-6">
+
+            <a href="{% url 'output' %}">output</a>
+
+            {% for i in movies %}
+            <h1>hello</h1>
+            <img src="{{ i.image.url }}" width="200px" height="250px" alt="nil">
+            <a href="{% url 'update' i.id %}" class="btn bg-secondary"> update</a>
+            <a href="{% url 'delete' i.id %}" class="btn bg-danger">delete</a>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

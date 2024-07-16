@@ -1,0 +1,13 @@
+{% load static %}
+{% include "base.html" %}
+{% block content %}
+
+
+{% for i in movies %}
+<h1>hello</h1>
+<img src="{{ i.image.url }}" width="200px" height="250px" alt="nil">
+{% endfor %}
+
+
+
+{% endblock %}

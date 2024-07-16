@@ -1,0 +1,32 @@
+{% load static %}
+{% include "base.html" %}
+{% block content %}
+
+<h1>Update</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form class="border p-4 mt-5 mb-2" method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Your Name:</label>
+                    <input type="text" class="form-control" id="id_name" name="name" value="{{ task.name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_image">Your Image:</label>
+                    {% if task.image %}
+                        <img src="{{ task.image.url }}" alt="Current Image" class="img-thumbnail mb-2">
+                    {% endif %}
+                    <input class="form-control-file" type="file" id="id_image" name="image">
+                </div>
+                <div class="form-group">
+                    <label for="id_message">Your Message:</label>
+                    <textarea id="id_message" class="form-control" name="message" rows="4" required>{{ task.message }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
