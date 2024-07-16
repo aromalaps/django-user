@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Profile Picture with Edit Form -->
+        </div>
+        <div class="col-md-8">
+            <!-- User Information -->
+            {% if profile.profilepic %}
+                <form method="post" enctype="multipart/form-data" action="{% url 'image' id=user.id %}" id="profile-form">
+                    {% csrf_token %}
+
+                    <label for="profile-pic-upload" class="custom-file-upload">
+                <img src="{{ profile.profilepic.url }}" height="100px" width="100px" alt="Profile Picture">
+
+                        <i class="fa fa-pencil fa-lg text-primary"></i>
+                        <input type="file" name="image" accept="image/*" required id="profile-pic-upload" class="visually-hidden">
+                    </label>
+                    
+                </form>
+            {% else %}
+            <div>
+          
+                <form method="post" enctype="multipart/form-data" action="{% url 'image' id=user.id %}">
+                    {% csrf_token %}
+                    <label for="profile-pic-upload" class="custom-file-upload">
+                        <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg" height="100px" width="100px" alt="Profile Picture">
+
+                        <i class="fa fa-pencil fa-lg text-primary"></i>
+                        <input type="file" name="image" accept="image/*" required id="profile-pic-upload" class="visually-hidden">
+                    </label>
+                </br>
+                    <button class="ms-4" type="submit">Save</button>
+                </form>
+            </div>
+            {% endif %}
+            <h2>User Profile</h2>
+            <div class="mb-3">
+                <strong>Name:</strong>{{ user.first_name }}
+            </div>
+            <div class="mb-3">
+                <strong>Username:</strong> johndoe
+            </div>
+            <div class="mb-3">
+                <strong>Address:</strong> 123 Main St, City, Country
+            </div>
+            <!-- Add more profile information here -->
+        </div>
+    </div>
+</div>
+<script>
+    // Automatically submit the form
+    document.getElementById('profile-pic-upload').addEventListener('change', function() {
+        document.getElementById('profile-form').submit();
+    });
+</script>
+
+{% endblock %}
