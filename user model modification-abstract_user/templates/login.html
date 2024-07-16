@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 sign-in-section text-center">
+            <h2>Sign in</h2>
+            <p>or use your account</p>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+                <a href="#" class="text-decoration-none">Forgot your password?</a>
+                <button type="submit" class="btn btn-dark w-100 mt-3">Sign In</button>
+            </form>
+        </div>
+        <div class="col-lg-6 hello-friend-section text-center">
+            <h2>Hello, Friend!</h2>
+            <p>Enter your personal details and start your journey with us</p>
+            <button type="button" class="btn btn-outline-primary" id="sign-up-btn">Sign Up</button>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('sign-up-btn').addEventListener('click', function() {
+        window.location.href = "{% url 'register' %}";
+    });
+</script>
+{% endblock %}
